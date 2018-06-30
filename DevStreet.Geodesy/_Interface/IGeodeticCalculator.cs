@@ -27,7 +27,7 @@ namespace DevStreet.Geodesy
         /// <param name="startPoint">Start point of great circle path.</param>
         /// <param name="endPoint">End point of great circle path.</param>
         /// <param name="radius">Radius of earth.</param>
-        /// <returns>The distance along great circle to point nearest point A in the same units as the radius.</returns>
+        /// <returns>The distance along great circle to point nearest point A in metres.</returns>
         double AlongTrackDistance(ICoordinate pointA, ICoordinate startPoint, ICoordinate endPoint, double radius);
 
         /// <summary>

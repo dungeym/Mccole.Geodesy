@@ -3,9 +3,9 @@
 namespace DevStreet.Geodesy
 {
     /// <summary>
-    /// Represents a point-in-time that a specific coordinate was travelled through.
+    /// Represents the point-in-time that a specific Waypoint was travelled through.
     /// </summary>
-    public interface ITrackpoint : ICoordinate
+    public interface ITrackpoint : IWaypoint
     {
         /// <summary>
         /// The date and time the coordinate was travelled through.

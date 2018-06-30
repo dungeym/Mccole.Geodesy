@@ -83,6 +83,10 @@ namespace DevStreet.Geodesy.Calculator
         /// <returns>The distance along great circle to point nearest point A in the same units as the radius.</returns>
         public double AlongTrackDistance(ICoordinate pointA, ICoordinate startPoint, ICoordinate endPoint, double radius)
         {
+            if (pointA == null)
+            {
+                throw new ArgumentNullException(nameof(pointA), "The argument cannot be null.");
+            }
             if (startPoint == null)
             {
                 throw new ArgumentNullException(nameof(startPoint), "The argument cannot be null.");
@@ -212,6 +216,11 @@ namespace DevStreet.Geodesy.Calculator
             {
                 throw new ArgumentNullException(nameof(point2), "The argument cannot be null.");
             }
+            if (latitude < -180 || latitude > 180)
+            {
+                throw new ArgumentOutOfRangeException(nameof(latitude), latitude, "The argument must be between -180 and 180.");
+            }
+
 
             var φ = latitude.ToRadians();
             var φ1 = point1.Latitude.ToRadians();
@@ -487,6 +496,7 @@ namespace DevStreet.Geodesy.Calculator
             {
                 throw new ArgumentNullException(nameof(pointC), "The argument cannot be null.");
             }
+            ValidateRadius(radius);
 
             pointX = PerpendicularPoint(pointA, pointB, pointC);
             if (pointX == null)
@@ -566,6 +576,7 @@ namespace DevStreet.Geodesy.Calculator
             {
                 throw new ArgumentNullException(nameof(pointC), "The argument cannot be null.");
             }
+            ValidateRadius(radius);
 
             // To accommodate where the line A->B does not extend far enough that a perpendicular line could be drawn from
             // it to pointC we extend the A->B line by the greatest of the 2 distances, A->B and A->C.
@@ -619,6 +630,10 @@ namespace DevStreet.Geodesy.Calculator
             if (pointB == null)
             {
                 throw new ArgumentNullException(nameof(pointB), "The argument cannot be null.");
+            }
+            if (fraction < 0 || fraction > 1)
+            {
+                throw new ArgumentOutOfRangeException(nameof(fraction), fraction, "The argument cannot be less than zero or greater than one.");
             }
 
             var φ1 = pointA.Latitude.ToRadians();

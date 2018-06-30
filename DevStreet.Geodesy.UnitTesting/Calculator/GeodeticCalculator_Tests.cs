@@ -2,6 +2,7 @@
 using DevStreet.Geodesy.Extension;
 using DevStreet.Geodesy.Formatter;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Moq;
 using System;
 
 namespace DevStreet.Geodesy.UnitTesting.Calculator
@@ -52,6 +53,39 @@ namespace DevStreet.Geodesy.UnitTesting.Calculator
             }
 
             return d;
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void AlongTrackDistance_EndPoint_Null_ThrowsException()
+        {
+            var pointA = new Mock<ICoordinate>();
+            var startPoint = new Mock<ICoordinate>();
+            ICoordinate endPoint = default(ICoordinate);
+
+            GeodeticCalculator.Instance.AlongTrackDistance(pointA.Object, startPoint.Object, endPoint);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void AlongTrackDistance_PointA_Null_ThrowsException()
+        {
+            ICoordinate pointA = default(ICoordinate);
+            var startPoint = new Mock<ICoordinate>();
+            var endPoint = new Mock<ICoordinate>();
+
+            GeodeticCalculator.Instance.AlongTrackDistance(pointA, startPoint.Object, endPoint.Object);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void AlongTrackDistance_StartPoint_Null_ThrowsException()
+        {
+            var pointA = new Mock<ICoordinate>();
+            ICoordinate startPoint = default(ICoordinate);
+            var endPoint = new Mock<ICoordinate>();
+
+            GeodeticCalculator.Instance.AlongTrackDistance(pointA.Object, startPoint, endPoint.Object);
         }
 
         [TestMethod]
@@ -555,6 +589,43 @@ namespace DevStreet.Geodesy.UnitTesting.Calculator
         }
 
         [TestMethod]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void DistanceToLine_PointA_Null_ThrowsException()
+        {
+            ICoordinate pointA = default(ICoordinate);
+            var pointB = new Mock<ICoordinate>();
+            var pointC = new Mock<ICoordinate>();
+            ICoordinate pointX;
+
+            GeodeticCalculator.Instance.DistanceToLine(pointA, pointB.Object, pointC.Object, out pointX);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void DistanceToLine_PointB_Null_ThrowsException()
+        {
+            var pointA = new Mock<ICoordinate>();
+            ICoordinate pointB = default(ICoordinate);
+            var pointC = new Mock<ICoordinate>();
+            ICoordinate pointX;
+
+            GeodeticCalculator.Instance.DistanceToLine(pointA.Object, pointB, pointC.Object, out pointX);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void DistanceToLine_PointC_Null_ThrowsException()
+        {
+            var pointA = new Mock<ICoordinate>();
+            var pointB = new Mock<ICoordinate>();
+            ICoordinate pointC = default(ICoordinate);
+            ICoordinate pointX;
+
+            GeodeticCalculator.Instance.DistanceToLine(pointA.Object, pointB.Object, pointC, out pointX);
+        }
+
+
+        [TestMethod]
         public void DistanceToLine_VeryLongDistances_Assert()
         {
             var pointA = new Coordinate(0, 0);
@@ -596,6 +667,67 @@ namespace DevStreet.Geodesy.UnitTesting.Calculator
 
             System.Diagnostics.Debug.WriteLine(string.Format(new DegreeMinuteSecondFormatInfo(), "{0:DMS}", result));
             Assert.AreEqual(11.2752, System.Math.Round(result, 4));
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentOutOfRangeException))]
+        public void IntermediatePoint_Fraction_GreaterThan_One_ThrowsException()
+        {
+            var pointA = new Mock<ICoordinate>();
+            var pointB = new Mock<ICoordinate>();
+            double fraction = 1.1;
+
+            GeodeticCalculator.Instance.IntermediatePoint(pointA.Object, pointB.Object, fraction);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentOutOfRangeException))]
+        public void IntermediatePoint_Fraction_LessThan_Zero_ThrowsException()
+        {
+            var pointA = new Mock<ICoordinate>();
+            var pointB = new Mock<ICoordinate>();
+            double fraction = -0.1;
+
+            GeodeticCalculator.Instance.IntermediatePoint(pointA.Object, pointB.Object, fraction);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void IntermediatePoint_PointA_Null_ThrowsException()
+        {
+            ICoordinate pointA = default(ICoordinate);
+            var pointB = new Mock<ICoordinate>();
+            double fraction = 0.5;
+
+            GeodeticCalculator.Instance.IntermediatePoint(pointA, pointB.Object, fraction);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void IntermediatePoint_PointB_Null_ThrowsException()
+        {
+            var pointA = new Mock<ICoordinate>();
+            ICoordinate pointB = default(ICoordinate);
+            double fraction = 0.5;
+
+            GeodeticCalculator.Instance.IntermediatePoint(pointA.Object, pointB, fraction);
+        }
+
+        [TestMethod]
+        public void IntermediatePoint_Valid_Assert()
+        {
+            var pointA = new Mock<ICoordinate>();
+            pointA.Setup(x => x.Latitude).Returns(0);
+            pointA.Setup(x => x.Longitude).Returns(0);
+            var pointB = new Mock<ICoordinate>();
+            pointB.Setup(x => x.Latitude).Returns(0);
+            pointB.Setup(x => x.Longitude).Returns(0.0010000);
+            double fraction = 0.5;
+
+            var result = GeodeticCalculator.Instance.IntermediatePoint(pointA.Object, pointB.Object, fraction);
+
+            Assert.IsTrue(result.Latitude.WithinTolerance(0));
+            Assert.IsTrue(result.Longitude.WithinTolerance((0.0010000 / 2)));
         }
 
         [TestMethod]
@@ -716,6 +848,158 @@ namespace DevStreet.Geodesy.UnitTesting.Calculator
             System.Diagnostics.Debug.WriteLine(result);
             Assert.AreEqual(54.36229, Math.Round(result.Latitude, 5));
             Assert.AreEqual(-4.53067, Math.Round(result.Longitude, 5));
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void CrossingParallels_Point1_Null_ThrowsException()
+        {
+            ICoordinate point1 = default(ICoordinate);
+            var point2 = new Coordinate("58 38 38N", "003 04 12W");
+            double latitude = 0;
+
+            GeodeticCalculator.Instance.CrossingParallels(point1, point2, latitude);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void CrossingParallels_Point2_Null_ThrowsException()
+        {
+            var point1 = new Coordinate("58 38 38N", "003 04 12W");
+            ICoordinate point2 = default(ICoordinate);
+            double latitude = 0;
+
+            GeodeticCalculator.Instance.CrossingParallels(point1, point2, latitude);
+        }
+
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentOutOfRangeException))]
+        public void CrossingParallels_Latitude_TooLow_ThrowsException()
+        {
+            var point1 = new Coordinate("58 38 38N", "003 04 12W");
+            var point2 = new Coordinate("58 38 38N", "003 04 12W");
+            double latitude = -181;
+
+            GeodeticCalculator.Instance.CrossingParallels(point1, point2, latitude);
+        }
+
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentOutOfRangeException))]
+        public void CrossingParallels_Latitude_TooHigh_ThrowsException()
+        {
+            var point1 = new Coordinate("58 38 38N", "003 04 12W");
+            var point2 = new Coordinate("58 38 38N", "003 04 12W");
+            double latitude = 181;
+
+            GeodeticCalculator.Instance.CrossingParallels(point1, point2, latitude);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void DistanceToPlane_PointA_Null_ThrowsException()
+        {
+            ICoordinate pointA = default(ICoordinate);
+            var pointB = new Mock<ICoordinate>();
+            var pointC = new Mock<ICoordinate>();
+            ICoordinate pointX;
+
+            GeodeticCalculator.Instance.DistanceToPlane(pointA, pointB.Object, pointC.Object, out pointX);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void DistanceToPlane_PointB_Null_ThrowsException()
+        {
+            var pointA = new Mock<ICoordinate>();
+            ICoordinate pointB = default(ICoordinate);
+            var pointC = new Mock<ICoordinate>();
+            ICoordinate pointX;
+
+            GeodeticCalculator.Instance.DistanceToPlane(pointA.Object, pointB, pointC.Object, out pointX);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void DistanceToPlane_PointC_Null_ThrowsException()
+        {
+            var pointA = new Mock<ICoordinate>();
+            var pointB = new Mock<ICoordinate>();
+            ICoordinate pointC = default(ICoordinate);
+            ICoordinate pointX;
+
+            GeodeticCalculator.Instance.DistanceToPlane(pointA.Object, pointB.Object, pointC, out pointX);
+        }
+
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void MaximumLatitude_PointA_Null_ThrowsException()
+        {
+            ICoordinate pointA = default(ICoordinate);
+            double bearing = 0;
+
+            GeodeticCalculator.Instance.MaximumLatitude(pointA, bearing);
+        }
+
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentOutOfRangeException))]
+        public void MaximumLatitude_Bearing_TooLow_ThrowsException()
+        {
+            var pointA = new Mock<ICoordinate>();
+            double bearing = -1;
+
+            GeodeticCalculator.Instance.MaximumLatitude(pointA.Object, bearing);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentOutOfRangeException))]
+        public void MaximumLatitude_Bearing_TooHigh_ThrowsException()
+        {
+            var pointA = new Mock<ICoordinate>();
+            double bearing = 361;
+
+            GeodeticCalculator.Instance.MaximumLatitude(pointA.Object, bearing);
+        }
+
+
+
+
+
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void PerpendicularPoint_PointA_Null_ThrowsException()
+        {
+            ICoordinate pointA = default(ICoordinate);
+            var pointB = new Mock<ICoordinate>();
+            var pointC = new Mock<ICoordinate>();
+
+            GeodeticCalculator.Instance.PerpendicularPoint(pointA, pointB.Object, pointC.Object);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void PerpendicularPoint_PointB_Null_ThrowsException()
+        {
+            var pointA = new Mock<ICoordinate>();
+            ICoordinate pointB = default(ICoordinate);
+            var pointC = new Mock<ICoordinate>();
+
+            GeodeticCalculator.Instance.PerpendicularPoint(pointA.Object, pointB, pointC.Object);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void PerpendicularPoint_PointC_Null_ThrowsException()
+        {
+            var pointA = new Mock<ICoordinate>();
+            var pointB = new Mock<ICoordinate>();
+            ICoordinate pointC = default(ICoordinate);
+
+            GeodeticCalculator.Instance.DistanceToPlane(pointA.Object, pointB.Object, pointC);
         }
     }
 }

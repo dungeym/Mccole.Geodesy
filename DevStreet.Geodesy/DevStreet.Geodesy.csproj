@@ -8,9 +8,10 @@
     <OutputType>Library</OutputType>
     <RootNamespace>DevStreet.Geodesy</RootNamespace>
     <AssemblyName>DevStreet.Geodesy</AssemblyName>
-    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -49,21 +50,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Calculator\CalculatorBase.cs" />
-    <Compile Include="Simplification\DouglasPeuckerFilter.cs" />
-    <Compile Include="Simplification\FilterBase.cs" />
-    <Compile Include="Simplification\LangFilter.cs" />
-    <Compile Include="Simplification\DirectionFilter.cs" />
-    <Compile Include="Simplification\NthPointFilter.cs" />
-    <Compile Include="Simplification\OpheimFilter.cs" />
-    <Compile Include="Simplification\PerpendicularDistanceFilter.cs" />
-    <Compile Include="Simplification\RadialDistanceFilter.cs" />
-    <Compile Include="Simplification\ReumannWitkamFilter.cs" />
-    <Compile Include="Simplification\SequentialCoordinate.cs" />
-    <Compile Include="Simplification\StoppageFilter.cs" />
-    <Compile Include="Trackpoint.cs" />
+    <Compile Include="Calculator\_BaseClass\CalculatorBase.cs" />
     <Compile Include="Extension\FloatToleranceExtension.cs" />
-    <Compile Include="_Interface\ITrackpoint.cs" />
     <Compile Include="_Interface\ICoordinateFactory.cs" />
     <Compile Include="_Interface\IGeodeticCalculator.cs" />
     <Compile Include="_Interface\IGeodeticFunctions.cs" />

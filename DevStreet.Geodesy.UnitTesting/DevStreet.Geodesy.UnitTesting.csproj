@@ -8,7 +8,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>DevStreet.Geodesy.UnitTesting</RootNamespace>
     <AssemblyName>DevStreet.Geodesy.UnitTesting</AssemblyName>
-    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
@@ -27,7 +27,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <Prefer32Bit>false</Prefer32Bit>
-    <CodeAnalysisRuleSet>..\..\..\..\VS Ruleset\Zero_Rules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSet>C:\Projects\Development\VS Ruleset\Zero_Rules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -40,14 +40,14 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Castle.Core, Version=4.0.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
-      <HintPath>..\packages\Castle.Core.4.2.1\lib\net45\Castle.Core.dll</HintPath>
+      <HintPath>..\packages\Castle.Core.4.3.0\lib\net45\Castle.Core.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="DevStreet.TestTools">
-      <HintPath>..\..\..\..\References\DevStreet.TestTools.dll</HintPath>
+      <HintPath>..\..\..\References\DevStreet.TestTools.dll</HintPath>
     </Reference>
     <Reference Include="Moq, Version=4.8.0.0, Culture=neutral, PublicKeyToken=69f491c39445e920, processorArchitecture=MSIL">
-      <HintPath>..\packages\Moq.4.8.2\lib\net45\Moq.dll</HintPath>
+      <HintPath>..\packages\Moq.4.8.3\lib\net45\Moq.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
@@ -55,12 +55,16 @@
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
-    <Reference Include="System.Threading.Tasks.Extensions, Version=4.1.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Threading.Tasks.Extensions.4.3.0\lib\portable-net45+win8+wp8+wpa81\System.Threading.Tasks.Extensions.dll</HintPath>
+    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=4.0.4.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.4.5.0\lib\netstandard1.0\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="System.ValueTuple, Version=4.0.2.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.ValueTuple.4.4.0\lib\net461\System.ValueTuple.dll</HintPath>
+    <Reference Include="System.Threading.Tasks.Extensions, Version=4.2.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Threading.Tasks.Extensions.4.5.1\lib\portable-net45+win8+wp8+wpa81\System.Threading.Tasks.Extensions.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.ValueTuple, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.ValueTuple.4.5.0\lib\netstandard1.0\System.ValueTuple.dll</HintPath>
       <Private>True</Private>
     </Reference>
   </ItemGroup>
@@ -81,7 +85,6 @@
   <ItemGroup>
     <Compile Include="Calculator\RhumCalculator_Tests.cs" />
     <Compile Include="Calculator\GeodeticCalculator_Tests.cs" />
-    <Compile Include="Trackpoint_Tests.cs" />
     <Compile Include="Extention\CoordinateExtension_Tests.cs" />
     <Compile Include="Formatter\CompassPointFormatInfo_Tests.cs" />
     <Compile Include="Formatter\MilliradianFormatInfo_Tests.cs" />
@@ -94,15 +97,6 @@
     <Compile Include="Coordinate_Tests.cs" />
     <Compile Include="DegreeMinuteSecond_Tests.cs" />
     <Compile Include="Extention\FloatToleranceExtension_Tests.cs" />
-    <Compile Include="Simplification\DouglasPeuckerFilter_Tests.cs" />
-    <Compile Include="Simplification\LangFilter_Tests.cs" />
-    <Compile Include="Simplification\DirectionFilter_Tests.cs" />
-    <Compile Include="Simplification\NthPointFilter_Tests.cs" />
-    <Compile Include="Simplification\PerpendicularDistanceFilter_Tests.cs" />
-    <Compile Include="Simplification\RadialDistanceFilter_Tests.cs" />
-    <Compile Include="Simplification\OpheimFilter_Tests.cs" />
-    <Compile Include="Simplification\ReumannWitkamFilter_Tests.cs" />
-    <Compile Include="Simplification\StoppageFilter_Tests.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DevStreet.Geodesy\DevStreet.Geodesy.csproj">
@@ -111,9 +105,9 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <None Include="app.config" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup />
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
       <ItemGroup>

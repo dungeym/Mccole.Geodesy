@@ -61,13 +61,11 @@ namespace DevStreet.Geodesy
 
         /// <summary>
         /// The angular distance of a place north or south of the earth's equator.
-        /// <para>Usually expressed in degrees and minutes.</para>
         /// </summary>
         public double Latitude { get; set; }
 
         /// <summary>
         /// The angular distance of a place east or west of the Greenwich meridian.
-        /// <para>Usually expressed in degrees and minutes.</para>
         /// </summary>
         public double Longitude { get; set; }
 

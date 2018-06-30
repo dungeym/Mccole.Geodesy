@@ -1,5 +1,5 @@
 ﻿using DevStreet.Geodesy.Extension;
-using DevStreet.Geodesy.Simplification;
+using DevStreet.Geodesy.Simplification.Filter;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
