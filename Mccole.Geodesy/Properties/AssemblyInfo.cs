@@ -15,11 +15,9 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyDescription("Library of geodesic algorithms based on the work of Chris Veness, published under the same MIT License.")]
 [assembly: ComVisible(false)]
 [assembly: Guid("552e97cf-a7ab-4f0a-904d-18668becc10c")]
-[assembly: AssemblyVersion("1.0.18204.4")]
-[assembly: AssemblyFileVersion("1.0.18204.4")]
+[assembly: AssemblyVersion("1.0.18204.5")]
+[assembly: AssemblyFileVersion("1.0.18204.5")]
 /*
- * The bulk of the logic in this library is from 2 sources.
- *
  * The geodesic work was transcribed from JavaScript source by Chris Veness (C) 2005-2016 and published under the same MIT License.
  * https://www.movable-type.co.uk/scripts/latlong.html
  *
