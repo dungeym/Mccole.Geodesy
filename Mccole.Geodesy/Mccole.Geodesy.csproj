@@ -28,7 +28,7 @@
     <DefineConstants Condition=" '$(TargetFrameworkVersion)' == 'v2.0' ">NETv20;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <CodeAnalysisRuleSet>C:\Development\VisualStudio\VisualStudio\Rules\Used_Rules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSet>..\Rules\Used_Rules.ruleset</CodeAnalysisRuleSet>
     <DocumentationFile>bin\Debug\Mccole.Geodesy.xml</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
@@ -46,7 +46,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <DocumentationFile>bin\Release\Mccole.Geodesy.xml</DocumentationFile>
-    <CodeAnalysisRuleSet>C:\Development\VisualStudio\VisualStudio\Rules\Used_Rules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSet>..\Rules\Used_Rules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <PropertyGroup>
     <StartupObject />
@@ -91,11 +91,11 @@
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>XCOPY "$(TargetDir)*.dll" "C:\Development\_References\$(ConfigurationName)\" /R /Y /C
-XCOPY "$(TargetDir)*.pdb" "C:\Development\_References\$(ConfigurationName)\" /R /Y /C
-XCOPY "$(TargetDir)*.xml" "C:\Development\_References\$(ConfigurationName)\" /R /Y /C</PostBuildEvent>
+    <PostBuildEvent>
+    </PostBuildEvent>
   </PropertyGroup>
   <PropertyGroup>
-    <PreBuildEvent>C:\Development\_References\OnBuild.exe "$(ProjectDir)Properties\AssemblyInfo.cs" /CS</PreBuildEvent>
+    <PreBuildEvent>
+    </PreBuildEvent>
   </PropertyGroup>
 </Project>

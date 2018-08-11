@@ -154,7 +154,7 @@ namespace Mccole.Geodesy.UnitTesting
         }
 
         [TestMethod]
-        public void ToCompassPoint_Cardinalt_Assert()
+        public void ToCompassPoint_Cardinal_Assert()
         {
             var degrees = 10.5;
             DegreeMinuteSecond subject = new DegreeMinuteSecond(degrees);

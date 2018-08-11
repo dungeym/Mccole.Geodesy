@@ -33,7 +33,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <Prefer32Bit>false</Prefer32Bit>
-    <CodeAnalysisRuleSet>C:\Development\VisualStudio\VisualStudio\Rules\Zero_Rules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSet>..\Rules\Zero_Rules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -54,9 +54,6 @@
     <Reference Include="Castle.Core, Version=4.0.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
       <HintPath>..\packages\Castle.Core.4.3.0\lib\net45\Castle.Core.dll</HintPath>
       <Private>True</Private>
-    </Reference>
-    <Reference Include="Mccole.TestTools">
-      <HintPath>..\..\..\_References\$(Configuration)\Mccole.TestTools.dll</HintPath>
     </Reference>
     <Reference Include="Moq, Version=4.8.0.0, Culture=neutral, PublicKeyToken=69f491c39445e920, processorArchitecture=MSIL">
       <HintPath>..\packages\Moq.4.8.3\lib\net45\Moq.dll</HintPath>
@@ -95,6 +92,7 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="Arbitrary.cs" />
     <Compile Include="Calculator\RhumCalculator_Tests.cs" />
     <Compile Include="Calculator\GeodeticCalculator_Tests.cs" />
     <Compile Include="Extention\CoordinateExtension_Tests.cs" />
@@ -109,6 +107,7 @@
     <Compile Include="Coordinate_Tests.cs" />
     <Compile Include="DegreeMinuteSecond_Tests.cs" />
     <Compile Include="Extention\FloatToleranceExtension_Tests.cs" />
+    <Compile Include="TestData.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Mccole.Geodesy\Mccole.Geodesy.csproj">
